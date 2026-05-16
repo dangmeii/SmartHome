@@ -1,5 +1,6 @@
+// Hàm này khó sử dụng do sụt áp trên màn TFT khi loa kêu to, nên tạm thời bỏ qua, để dành cho các dự án sau có điều kiện test kỹ hơn
 #include "Audio_system.h"
-#include <LittleFS.h> // Gọi thư viện quản lý ổ cứng
+#include <LittleFS.h> // thư viện quản lý ổ cứng
 
 Audio audio;
 

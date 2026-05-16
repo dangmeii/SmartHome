@@ -1,37 +1,26 @@
+---- Lưu ý -----
+1. Chân GPIO dành cho servo SG90: có thể dùng ADC2 vì nó hoạt động dựa trên xung vuông Digital
+   Chân GPIO dành cho MQ-2: không được sử dụng ADC2 vì nó dùng chung phần cứng với module WIFI
 
-This directory is intended for project header files.
+2. Board này không có cầu phân áp thu tín hiệu chân ADC2, VÌ VẬY NẾU SỬ DỤNG KHÍ ĐẬM ĐẶC -> CHÁY MCU
+- Sử dụng hơi cồn: ví dụ cồn 90 độ, nhỏ vào tờ giấy và đặt cách cảm biến 20 - 30cm, quạt cho khí khuếch tán tới sensor
 
-A header file is a file containing C declarations and macro definitions
-to be shared between several project source files. You request the use of a
-header file in your project source file (C, C++, etc) located in `src` folder
-by including it, with the C preprocessing directive `#include'.
+3. Loại bỏ chân D0 trên sensor MQ-2: chân này dùng để xuất 2 trạng thái CÓ/KHÔNG -> để thay đổi mức độ phải vặn sensity bằng tay
+=> thay thế bằng việc viết code chân D0 ảo, có thể thay giá trị sensity
+  - Nguồn: 5V 
 
-```src/main.c
+4. Cảm biến hồng ngoại (HW 416A) phải đợi 1 thời gian ~30s để hoạt động ổn định
 
-#include "header.h"
+5. Động cơ servo SG90 (360 độ)
 
-int main (void)
-{
- ...
-}
-```
+6. Chân cắm PINOUT của HW 416A
+  - Đỏ: chân IO36
+  - Cam: Vcc
+  - Nâu: GND
 
-Including a header file produces the same results as copying the header file
-into each source file that needs it. Such copying would be time-consuming
-and error-prone. With a header file, the related declarations appear
-in only one place. If they need to be changed, they can be changed in one
-place, and programs that include the header file will automatically use the
-new version when next recompiled. The header file eliminates the labor of
-finding and changing all the copies as well as the risk that a failure to
-find one copy will result in inconsistencies within a program.
+7. Chân cắm PINOUT của MQ-2
+  - Tím: chân IO8
 
-In C, the convention is to give header files names that end with `.h'.
-
-Read more about using header files in official GCC documentation:
-
-* Include Syntax
-* Include Operation
-* Once-Only Headers
-* Computed Includes
-
-https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html
+8. Chân cắm PINOUT của Rain_Sensor
+  - Chân SPK DIN - HD9
+  - Chân này nếu nạp chương trình trợ lý ảo thì đó là chỗ kết nối loa

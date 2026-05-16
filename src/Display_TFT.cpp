@@ -28,9 +28,9 @@ void display_ShowTestMessage() {
     tft.fillScreen(ST77XX_BLACK);
     
     tft.setTextColor(ST77XX_YELLOW);
-    tft.setTextSize(3);
+    tft.setTextSize(2);
     tft.setCursor(20, 60);
-    tft.print("TOP 1 SV VN");
+    tft.print("NHOM 3 DEP TRAI");
 }
 
 // HÀM RFID
@@ -50,7 +50,7 @@ void display_ShowUID(String ID){
 }
 
 void display_ShowStatus(String msg, uint16_t color) {
-    tft.setCursor(20, 210); // set pointer ở hàng dưới cùng
+    tft.setCursor(20, 180); // set pointer ở hàng dưới cùng
       tft.setTextSize(2);
     tft.setTextColor(color, ST77XX_BLACK); // Nền đen (đè chữ cũ)
     tft.print(msg); 
@@ -93,12 +93,30 @@ void display_ShowMotionStatus(bool isDetected) {
     tft.setTextSize(2);
     
     if (isDetected) {
-        // Chữ đỏ, nền đen (có khoảng trắng ở đuôi để đè chữ AN TOAN)
-        tft.setTextColor(ST77XX_RED, ST77XX_BLACK);
-        tft.print("PIR: CO NGUOI! "); 
+        // 1. Xóa trạng thái cũ (AN TOAN)
+        display_ClearText_Smart("PIR: AN TOAN", 20, 60, 2);
+        
+        // 2. In chữ mới lên 
+        tft.setCursor(20, 60);
+        tft.setTextColor(ST77XX_RED); 
+        tft.print("PIR: CO NGUOI!"); 
+        
     } else {
-        // Chữ xanh lá, nền đen
-        tft.setTextColor(ST77XX_GREEN, ST77XX_BLACK);
-        tft.print("PIR: AN TOAN.  "); 
+        // 1. Xóa trạng thái cũ (CO NGUOI)
+        display_ClearText_Smart("PIR: CO NGUOI!", 20, 60, 2);
+        
+        // 2. In chữ mới lên
+        tft.setCursor(20, 60);
+        tft.setTextColor(ST77XX_GREEN);
+        tft.print("PIR: AN TOAN"); 
     }
 }
+
+    void display_ShowGasLevel(int gasLevel) {
+        tft.setCursor(20, 210);
+        tft.setTextSize(2);
+        tft.setTextColor(ST77XX_MAGENTA, ST77XX_BLACK);
+        tft.print("GAS: ");
+        tft.print(gasLevel);
+        tft.print("    ");
+    }

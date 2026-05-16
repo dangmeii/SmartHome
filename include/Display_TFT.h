@@ -26,5 +26,7 @@ void display_ShowWeather(float temp, float hum);
 
 // Tà ma ngoại đạo
 void display_ShowMotionStatus(bool isDetected);
+void display_ShowGasLevel(int gasLevel);
+void display_rainLevel(int rainLevel);
 
 #endif
