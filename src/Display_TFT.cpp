@@ -79,34 +79,38 @@ void display_ShowWeather(float temp, float hum) {
     // 2. In giá trị mới
     tft.setCursor(ZONE_DHT_X, ZONE_DHT_Y);
     tft.setTextSize(2);
-    tft.setTextColor(ST77XX_CYAN); // Màu xanh lơ cho mát mẻ
     
+    // 2.1 In nhiệt độ
+    tft.setTextColor(ST77XX_ORANGE); 
     tft.print(temp, 1); // In 1 số thập phân
     tft.print("C  ");
-    tft.print(hum, 0);  // Độ ẩm in số nguyên cho gọn
+
+    // 2.2 In độ ẩm
+    tft.setTextColor(ST77XX_CYAN); // Xanh blue
+    tft.print(hum, 0);  // Độ ẩm in số nguyên 
     tft.print("%");
 }
 
 // Tà ma ngoại đạo
 void display_ShowMotionStatus(bool isDetected) {
-    tft.setCursor(20, 60); // Tọa độ tuốt dưới cùng
+    tft.setCursor(20, 65); // Tọa độ tuốt dưới cùng
     tft.setTextSize(2);
     
     if (isDetected) {
         // 1. Xóa trạng thái cũ (AN TOAN)
-        display_ClearText_Smart("PIR: AN TOAN", 20, 60, 2);
+        display_ClearText_Smart("PIR: AN TOAN", 20, 65, 2);
         
         // 2. In chữ mới lên 
-        tft.setCursor(20, 60);
+        tft.setCursor(20, 65);
         tft.setTextColor(ST77XX_RED); 
         tft.print("PIR: CO NGUOI!"); 
         
     } else {
         // 1. Xóa trạng thái cũ (CO NGUOI)
-        display_ClearText_Smart("PIR: CO NGUOI!", 20, 60, 2);
+        display_ClearText_Smart("PIR: CO NGUOI!", 20, 65, 2);
         
         // 2. In chữ mới lên
-        tft.setCursor(20, 60);
+        tft.setCursor(20, 65);
         tft.setTextColor(ST77XX_GREEN);
         tft.print("PIR: AN TOAN"); 
     }
@@ -120,3 +124,12 @@ void display_ShowMotionStatus(bool isDetected) {
         tft.print(gasLevel);
         tft.print("    ");
     }
+
+    void display_rainLevel(int rainLevel) {
+    tft.setCursor(20, 35); // Trục Y = 35 
+    tft.setTextSize(2);
+    tft.setTextColor(0x0410, ST77XX_BLACK); // Xanh cổ vịt
+    tft.print("RAIN: ");
+    tft.print(rainLevel);
+    tft.print("    "); // Quét rác hiển thị
+}

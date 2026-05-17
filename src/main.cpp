@@ -9,6 +9,7 @@
 #include "Audio_system.h"
 #include "Light_sensor.h"
 #include "MQ2_sensor.h" 
+#include "Rain_sensor.h"
 
 // Định nghĩa chân LED trên board
 #define ONBOARD_LED 38
@@ -58,7 +59,7 @@ void setup() {
 
     // Hàm nồng độ
     display_ShowGasLevel(mq2_ReadGas());
-   
+    
 }
 
 void loop() {
@@ -69,6 +70,13 @@ void loop() {
     if (currentMillis - previousDHTMillis >= dhtInterval) {
         previousDHTMillis = currentMillis;
         weather_Update();
+    }
+    int mucDoMua = rain_Read(); 
+
+    static unsigned long thoiDiemCapNhatTFT_Rain = 0;
+    if (currentMillis - thoiDiemCapNhatTFT_Rain >= 3000) {
+        display_rainLevel(mucDoMua);
+        thoiDiemCapNhatTFT_Rain = currentMillis;
     }
 
     // NHIỆM VỤ 2: QUẸT THẺ RFID
