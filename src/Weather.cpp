@@ -10,9 +10,9 @@ void weather_Init() {
 }
 
 // Hàm này sẽ được gọi mỗi 2 giây
-void weather_Update() {
-    float h = dht.readHumidity();
-    float t = dht.readTemperature();
+void weather_Update(float &t, float &h) {
+     h = dht.readHumidity();
+    t = dht.readTemperature();
 
     // Kiểm tra xem cảm biến có bị lỗi không
     if (isnan(h) || isnan(t)) {

@@ -4,6 +4,6 @@
 #include <Arduino.h>
 
 void weather_Init();
-void weather_Update();
+void weather_Update(float &t, float &h);
 
 #endif
